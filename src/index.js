@@ -2,12 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import List from "./list";
+
+import SelectImg from "./selectImg";
+import Image from "./image";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <List/>
+    <SelectImg/>
+
   </React.StrictMode>
 );
 
