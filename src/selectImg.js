@@ -1,36 +1,29 @@
-import React from "react";
+import React , {useState, useEffect} from "react";
 import Image from "./image";
 
-export default class SelectImg extends React.Component {
-    constructor(props) {
-        super(props);
+export default function SelectImg () {
 
-        this.state = {
-            link: ["https://bipbap.ru/wp-content/uploads/2017/08/0-70.jpg",
-                "https://klike.net/uploads/posts/2020-03/1583662497_1.jpg",
-                "https://klike.net/uploads/posts/2019-06/medium/1561011184_2.jpg"],
-            defaultIndexImage: 0
-        }
+    const [links, setLinks]=useState(["https://bipbap.ru/wp-content/uploads/2017/08/0-70.jpg",
+        "https://klike.net/uploads/posts/2020-03/1583662497_1.jpg",
+        "https://klike.net/uploads/posts/2019-06/medium/1561011184_2.jpg"]);
+    const [indexImg, setIndexImg]= useState(0);
+    const [link, setLink]=useState(links[indexImg]);
+    const [inputLink, setInputLink]=useState("")
 
-        this.edit = this.edit.bind(this);
-    }
+    return(
+        <React.Fragment>
+            <select name="imgLink" onChange={ (e) => {setLink(e.target.value)}}>
+            {links.map((img, i) => <option key = {i}  value={img} >{img} </option> ) }
+            </select>
 
-    edit(i) {
-        console.log(i)
-        this.setState({defaultIndexImage: i})
-    }
+            <Image link={link}/>
+            <input type="text" value={inputLink}  onChange ={(event)=>{setInputLink(event.target.value)}} />
 
-    render() {
+            <button onClick={()=>{setLinks(links => {setInputLink("") ; return[...links,inputLink]})}}>add</button>
+            <button onClick={()=>{setInputLink("")}}>clear</button>
 
-        return(
-            <React.Fragment>
-                <select name="imgLink">
-                {this.state.link.map((img, i) => <option key = {i} onChange={ () => {this.edit(i)}} value={img} >{img} </option> ) }
-                </select>
+        </React.Fragment>
+    );
 
-                <Image link={this.state.link[this.state.defaultIndexImage]}/>
-            </React.Fragment>
-        );
-    }
 
 }

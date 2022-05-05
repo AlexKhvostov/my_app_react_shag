@@ -1,16 +1,6 @@
-import React from "react";
+import React , {useState, useEffect} from "react";
 
-export default class Image extends React.Component{
-    constructor(props) {
-        super(props);
+export default function Image(props){
 
-    }
-
-
-    render() {
-        return (<img src={this.props.link}/>
-
-        );
-    }
-
+        return (<img src={props.link}/>);
 }

@@ -1,51 +1,41 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Spinner from "./spinner";
 
-export default class UsersList extends React.Component {
-    constructor(props) {
-        super(props);
-        this.page = 1;
+export default function UsersList() {
 
-        this.state={ users : props.list,
-        spinner : "none"}
-        this.update = this.update.bind(this)
-    }
+    const [users, setUsers] = useState([]);
+    const [page, setPage] = useState(1);
+    const [isLoad, setIsLoad] = useState(true);
 
-
-    update(){
-        this.setState({spinner:"block"})
-        this.page++;
-        fetch(`https://reqres.in/api/users?page=${this.page}`)
+    function loadUsers() {
+        setIsLoad(true)
+        fetch(`https://reqres.in/api/users?page=${page}`)
             .then((response) => {
                 return response.json();
-
             })
-
             .then((data) => {
-                console.log(Array.from(data.data));
-                this.setState({users : Array.from(data.data)})
+                // console.log(data.data);
+                setUsers(data.data)
             })
-            .finally(()=>
-                setTimeout(()=> this.setState({spinner:"none"}),500)
-               )
-            ;
+            .finally(()=>{
+                setTimeout(()=>{setIsLoad(false)},500)
 
-
+            })
     }
 
-    render() {
+    useEffect(()=> {loadUsers()}, [page])
+
+    return (
+        <React.Fragment>
+            <ul>
+                {!isLoad && users.map((e) => <li key={e.id}>{e.first_name}</li>)}
+            </ul>
+            <button onClick={()=>{setPage(page-1)}}>back</button>
+            <button onClick={()=>{setPage(page+1)}}>next</button>
+
+            <Spinner isLoad={isLoad}/>
+        </React.Fragment>
+    )
 
 
-        console.log("render")
-        return(
-            <React.Fragment>
-                <ul>
-                    { this.state.users.map((e)=> <li key={e.id}>{e.first_name}</li>)}
-                </ul>
-                <button onClick={this.update}>next</button>
-                <Spinner hidden={this.state.spinner}/>
-            </React.Fragment>
-        )
-
-    }
 }

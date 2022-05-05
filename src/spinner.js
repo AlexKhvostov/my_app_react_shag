@@ -1,17 +1,9 @@
 import React from "react";
 
-export default class Spinner extends React.Component {
-    constructor(props) {
-        super(props);
+export default function Spinner(props) {
+
+        return props.isLoad && <div className="loader" >Loading...</div>
 
 
-    }
-
-    render() {
-        return(
-            <div className="loader" style={ {display : this.props.hidden } }>Loading...</div>
-            )
-
-    }
 
 }
