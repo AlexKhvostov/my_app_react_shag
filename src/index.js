@@ -4,14 +4,25 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import UsersList from "./usersList";
 
+let aa = []
+fetch("https://reqres.in/api/users?page=1")
+    .then((response) => {
+        return response.json();
+    })
+    .then((data) => {
+        console.log(Array.from(data.data));
+        aa = Array.from(data.data)
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(
+            <React.StrictMode>
+                <UsersList list={aa}/>
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <UsersList/>
+            </React.StrictMode>
+        );
+    });
 
-  </React.StrictMode>
-);
+
+
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
