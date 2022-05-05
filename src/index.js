@@ -2,14 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import UsersList from "./usersList";
 
-import SelectImg from "./selectImg";
-import Image from "./image";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <SelectImg/>
+    <UsersList/>
 
   </React.StrictMode>
 );
