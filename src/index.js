@@ -4,6 +4,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import UsersList from "./usersList";
 import SelectImg from "./selectImg";
+import CalcUl from "./calcUl";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -12,8 +13,9 @@ root.render(
         {/*<UsersList/>*/}
 
 
-        <SelectImg/>
+        {/*<SelectImg/>*/}
 
+        <CalcUl />
     </React.StrictMode>
 );
 
